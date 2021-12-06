@@ -1,0 +1,9 @@
+img {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .mobileMenu {
+    display: block !important;
+  }
+}
