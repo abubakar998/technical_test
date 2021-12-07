@@ -1,3 +1,4 @@
+import React from "react";
 import classes from "../styles/Layout.module.css";
 import Nav from "./Nav";
 

@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Register() {
   return (
     <section id="register" className="bg-light py-5">

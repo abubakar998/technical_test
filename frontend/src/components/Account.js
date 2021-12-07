@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Link } from "react-router-dom";
 
 export default function Account() {
@@ -19,4 +21,4 @@ export default function Account() {
   );
 }
 
-// this is comment 
+// this is comment

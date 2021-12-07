@@ -1,3 +1,5 @@
+import React from "react";
+
 import classes from "../styles/Search.module.css";
 
 export default function Search() {

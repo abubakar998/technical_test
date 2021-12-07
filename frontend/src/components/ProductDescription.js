@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function ProductDescription() {
   return (
     <div class="row mb-5">

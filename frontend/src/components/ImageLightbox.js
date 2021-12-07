@@ -1,3 +1,4 @@
+import React from "react";
 import { SRLWrapper } from "simple-react-lightbox";
 import homeInside1 from "../assets/images/homes/home-inside-1.jpg";
 import homeInside2 from "../assets/images/homes/home-inside-2.jpg";
