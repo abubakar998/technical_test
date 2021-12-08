@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "./components/Layout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { ProductProvider } from "./contexts/ProductContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        {/* <ProductProvider> */}
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -24,6 +26,7 @@ function App() {
             <Route path="/product/:id" element={<Product />} />
           </Routes>
         </Layout>
+        {/* </ProductProvider> */}
       </Router>
     </div>
   );

@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-export default function useProductList() {
+const AuthContext = React.createContext();
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
+export function AuthProvider(children) {
   const [loading, setLoading] = useState(true);
-  const [productList, setProductList] = useState([]);
+  const [User, setUser] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data: response } = await axios.get("/api/products");
-        setProductList(response);
+        const { data: response } = await axios.get("/api/users");
+        setUser(response);
       } catch (error) {
         console.error(error.message);
       }

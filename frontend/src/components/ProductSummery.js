@@ -1,17 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useVideoList from "./hooks/useProductList";
+import useProductList from "./hooks/useProductList";
 //import InfiniteScroll from "react-infinite-scroll-hook";
 
 export default function ProductSummery() {
-  const { loading, productList } = useVideoList();
-  console.log(productList);
-
+  const { loading, productList } = useProductList([]);
   return (
     <div>
       {productList.length > 0 && (
         //<InfiniteScroll dataLength={productList.length} loader="Loading...">
-        <div>
+        <div className="row">
           {productList.map((product) => (
             <div className="col-md-6 col-lg-4 mb-4">
               <div className="card">
@@ -29,7 +27,7 @@ export default function ProductSummery() {
                       <h4 className="text-body">{product.title}</h4>
                       <p>
                         <i className="fas fa-map-marker text-success"></i>
-                        <span className="ps-1">Norwood MA, 02062</span>
+                        <span className="ps-1">{product.address}</span>
                       </p>
                     </div>
                     <hr />
@@ -46,7 +44,7 @@ export default function ProductSummery() {
                     <hr />
                     <Link
                       class="btn btn-success d-grid"
-                      to="/product/:id"
+                      to={`/product/${product.id}`}
                       role="button"
                     >
                       More Info

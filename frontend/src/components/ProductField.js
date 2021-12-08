@@ -1,6 +1,8 @@
 import React from "react";
 
-export default function ProductField() {
+export default function ProductField(props) {
+  const { product } = props;
+  console.log(product);
   return (
     <div className="row mb-5 fields">
       <div className="col-md-6">
@@ -27,11 +29,11 @@ export default function ProductField() {
           </li>
           <li className="list-group-item text-success my-1">
             <i className="fas fa-calendar"></i> Listing Date:
-            <span className="float-end">8/30/2018</span>
+            <span className="float-end">12/07/2021</span>
           </li>
           <li className="list-group-item text-success my-1">
             <i className="fas fa-bed"></i> Realtor:
-            <span className="float-end">Kyle Brown</span>
+            <span className="float-end">{product.vendor}</span>
           </li>
         </ul>
       </div>
