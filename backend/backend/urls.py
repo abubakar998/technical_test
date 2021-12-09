@@ -19,15 +19,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 import products.views as pv
+# from .views import*
 import vendors.views as vv
 import users.views as uv
 
 router = routers.DefaultRouter()
-router.register(r'products', pv.ProductView, 'Product')
+# router.register(r'products', pv.ProductListView, 'Product')
 router.register(r'vendors', vv.VendorView, 'Vendor')
 router.register(r'users', uv.UserView, 'User')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('generic-products/', pv.ProductListView.as_view() ),
+    path('generic-products/<id>/', pv.ProductDetailView.as_view() ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
