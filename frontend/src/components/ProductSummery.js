@@ -4,7 +4,8 @@ import useProductList from "./hooks/useProductList";
 //import InfiniteScroll from "react-infinite-scroll-hook";
 
 export default function ProductSummery() {
-  const { loading, productList } = useProductList([]);
+  const { loading, productList } = useProductList();
+  // console.log(productList);
   return (
     <div>
       {productList.length > 0 && (
@@ -34,7 +35,7 @@ export default function ProductSummery() {
                     <div className="row">
                       <div className="col-6 text-success">
                         <i className="fas fa-user"></i>
-                        <span className="ps-1">{product.vendor}</span>
+                        <span className="ps-1">{product.vendor.name}</span>
                       </div>
                       <div className="col-6 text-success">
                         <i className="fas fa-clock"></i>

@@ -9,7 +9,7 @@ export default function useProductList() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data: response } = await axios.get("/api/products");
+        const { data: response } = await axios.get("/generic-products");
         setProductList(response);
       } catch (error) {
         console.error(error.message);

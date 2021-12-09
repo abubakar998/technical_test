@@ -1,8 +1,15 @@
 from rest_framework import serializers
 from .models import Product, ProductImages
+from vendors.serializers import VendorSerializer
+
+class ProductImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImages
+        fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
+    vendor = VendorSerializer()
+    photo = ProductImagesSerializer(many=True)
     class Meta:
         model = Product
-        fields = ('id','vendor','title', 'address','description','price', 'bedrooms','bathrooms', 'sqft', 'photo_main','photo', 'is_published', 'list_date' )
-
+        fields = '__all__'
