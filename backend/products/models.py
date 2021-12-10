@@ -5,7 +5,7 @@ from vendors.models import Vendor
 # Create your models here.
 
 class ProductImages(models.Model):
-    photo= models.ImageField(upload_to='photos/%Y/%m/%d',blank=True)
+    image= models.ImageField(upload_to='photos/%Y/%m/%d',blank=True)
     def __str__(self):
         pk = self.id
         return f"photo-{pk}"
@@ -20,7 +20,6 @@ class Product(models.Model):
     bedrooms = models.IntegerField()
     bathrooms = models.IntegerField()
     sqft = models.IntegerField()
-    photo_main = models.ImageField(upload_to='photos/%Y/%m/%d')
     photo = models.ManyToManyField(ProductImages,  blank=True, null=True,)
     is_published = models.BooleanField(default=True)
     list_date = models.DateTimeField(default=datetime.now, blank=True)

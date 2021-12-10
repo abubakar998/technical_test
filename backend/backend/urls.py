@@ -26,11 +26,14 @@ import users.views as uv
 router = routers.DefaultRouter()
 # router.register(r'products', pv.ProductListView, 'Product')
 router.register(r'vendors', vv.VendorView, 'Vendor')
-router.register(r'users', uv.UserView, 'User')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('generic-products/', pv.ProductListView.as_view() ),
     path('generic-products/<id>/', pv.ProductDetailView.as_view() ),
+    path('generic-users/', uv.UserListView.as_view() ),
+    path('generic-user-create/', uv.UserCreate.as_view() ),
+    path('generic-users/<id>/', uv.UserDetailView.as_view() ),
+    path('images/', pv.ProductUploadAPIView.as_view(), name="img"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
