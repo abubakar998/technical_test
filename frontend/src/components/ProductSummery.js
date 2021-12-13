@@ -5,6 +5,7 @@ import useProductList from "./hooks/useProductList";
 
 export default function ProductSummery() {
   const { loading, productList } = useProductList();
+
   // console.log(productList);
   return (
     <div>
@@ -14,7 +15,13 @@ export default function ProductSummery() {
           {productList.map((product) => (
             <div className="col-md-6 col-lg-4 mb-4">
               <div className="card">
-                <img className="card-img-top" src={product.photo_main} alt="" />
+                {
+                  <img
+                    className="card-img-top"
+                    src={product.photo[0].image}
+                    alt=""
+                  />
+                }
                 <div className="card-img-overlay ">
                   <h2>
                     <span className="badge bg-success text-white">

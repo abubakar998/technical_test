@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import ImageLightbox from "../components/ImageLightbox";
 import ProductField from "../components/ProductField";
@@ -24,20 +24,33 @@ export default function Product() {
   //   fetchData();
   // }, []);
 
-  const handleSuccess = (response) => {
-    setProduct(response.data);
-  };
+  // const handleSuccess = (response) => {
+  //   setProduct(response.data);
+  // };
 
-  const handlleError = (error) => {
-    setProduct(error.data);
-  };
+  // const handlleError = (error) => {
+  //   setProduct(error.data);
+  // };
+
+  // useEffect(() => {
+  //   axios.get(`/generic-products/${id}`).then(handleSuccess, handlleError);
+  // }, []);
 
   useEffect(() => {
-    axios.get(`/generic-products/${id}`).then(handleSuccess, handlleError);
+    fetch(`/generic-products/${id}`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data));
   }, []);
 
-  const { photo } = product;
-  console.log("=================", photo);
+  // const { photo } = product;
+  // console.log(photo[0]);
+
+  // const { photo } = product;
+
+  // photo.forEach((e) => {
+  //   console.log(e);
+  // });
+  // console.log("=================", photo);
 
   // const Error = () => {
   //   const err = "Error occured";
@@ -69,7 +82,7 @@ export default function Product() {
         <div class="row">
           <div class="col-md-9">
             {/* <Content loading={loading} /> */}
-            <ImageLightbox product={product} />
+            <ImageLightbox />
             <ProductField product={product} />
             <ProductDescription description={product.description} />
           </div>
