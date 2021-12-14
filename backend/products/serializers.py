@@ -10,8 +10,8 @@ class ProductImagesSerializer(serializers.ModelSerializer):
 
         write_only_fields = ("pid",)
 
-    def create(self, validated_date):
-        pid = validated_date.pop('pid')
+    def create(self, validated_data):
+        pid = validated_data.pop('pid')
         instance = self.Meta.model.objects.create(
             **validated_date
         )

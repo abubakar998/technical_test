@@ -35,5 +35,5 @@ urlpatterns = [
     path('generic-users/', uv.UserListView.as_view() ),
     path('generic-user-create/', uv.UserCreate.as_view() ),
     path('generic-users/<id>/', uv.UserDetailView.as_view() ),
-    path('images/', pv.ProductUploadAPIView.as_view(), name="img"),
+    path('product-images/', pv.ProductImageUploadAPIView.as_view(), name="img"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

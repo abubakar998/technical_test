@@ -162,6 +162,10 @@ REST_FRAMEWORK = {
 ],
 }
 
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'demo.serializers.UserSerializer'
+}
+
 # Media folder Settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

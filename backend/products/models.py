@@ -6,12 +6,13 @@ from vendors.models import Vendor
 
 class ProductImages(models.Model):
     image= models.ImageField(upload_to='photos/%Y/%m/%d',blank=True)
+    # product_id = models.ForeignKey(Product, on_delete= models.DO_NOTHING)
     def __str__(self):
         pk = self.id
         return f"photo-{pk}"
 
 class Product(models.Model):
-    vendor = models.ForeignKey(Vendor, on_delete = models.DO_NOTHING)
+    vendor = models.ForeignKey(Vendor, on_delete = models.CASCADE)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
@@ -20,7 +21,7 @@ class Product(models.Model):
     bedrooms = models.IntegerField()
     bathrooms = models.IntegerField()
     sqft = models.IntegerField()
-    photo = models.ManyToManyField(ProductImages,  blank=True, null=True,)
+    photo = models.ManyToManyField(ProductImages, blank=True, null=True, )
     is_published = models.BooleanField(default=True)
     list_date = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):

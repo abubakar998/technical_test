@@ -10,12 +10,12 @@ class ProductListView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
-class ProductDetailView(generics.RetrieveAPIView):
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
     lookup_field = 'id'
 
 
-class ProductUploadAPIView(generics.CreateAPIView):
+class ProductImageUploadAPIView(generics.CreateAPIView):
     serializer_class = ProductImagesSerializer
     queryset = ProductImages.objects.all()
