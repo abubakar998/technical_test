@@ -9,7 +9,7 @@ import Register from "./pages/Register";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
-import Modal from "./components/Modal1";
+import UploadProduct from "./pages/UploadProduct";
 
 function App() {
   return (
@@ -20,9 +20,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/modal" element={<Modal />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/UploadProduct" element={<UploadProduct />} />
             <Route path="/products" element={<Products />} />
             <Route path="/SearchedProducts" element={<SearchedProduct />} />
             <Route path="/product/:id" element={<Product />} />

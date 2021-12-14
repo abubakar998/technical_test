@@ -1,26 +1,66 @@
 import React, { useState, useEffect } from "react";
-export default function Modal(props) {
-  const { product } = props;
+// import { Modal } from "bootstrap/dist/js/bootstrap.bundle.js";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+export default function ModalComponent(props) {
+  const { product, id } = props;
+  // const [vendor, setVendor] = useState({});
   const [title, setTitle] = useState(product?.title);
   const [address, setAddress] = useState(product?.address);
+  // const [photo, setPhoto] = useState([]);
   const [city, setCity] = useState(product?.city);
   const [description, setDescription] = useState(product?.description);
   const [price, setPrice] = useState(product?.price);
   const [bedrooms, setBedrooms] = useState(product?.bedrooms);
   const [bathrooms, setBathrooms] = useState(product?.bathrooms);
-
   const [sqft, setSqft] = useState(product?.sqft);
 
   useEffect(() => {
+    // setVendor(product?.vendor);
     setTitle(product?.title);
     setAddress(product?.address);
+    // setPhoto(product?.photo);
     setCity(product?.city);
     setDescription(product?.description);
     setPrice(product?.price);
     setBedrooms(product?.bedrooms);
     setBathrooms(product?.bathrooms);
-    setSqft(product?.bathrooms);
+    setSqft(product?.sqft);
   }, [product]);
+
+  // console.log(id);
+
+  const navigate = useNavigate();
+
+  async function updateProduct(e) {
+    e.preventDefault();
+    // let myModal = new Modal(document.getElementById("updateModal"));
+
+    const p = {
+      // vendor: vendor,
+      title: title,
+      address: address,
+      // photo: photo,
+      city: city,
+      description: description,
+      price: price,
+      bedrooms: bedrooms,
+      bathrooms: bathrooms,
+      sqft: sqft,
+    };
+    console.log(p);
+    axios
+      .patch(`/generic-products/${id}/`, p)
+      .then(function (response) {
+        console.log(response);
+        // myModal.hide();
+        navigate(`/products/`);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   return (
     <>
@@ -34,7 +74,7 @@ export default function Modal(props) {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
@@ -167,7 +207,11 @@ export default function Modal(props) {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={(e) => updateProduct(e)}
+              >
                 Save
               </button>
             </div>

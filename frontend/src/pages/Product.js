@@ -4,7 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import ImageLightbox from "../components/ImageLightbox";
 import ProductField from "../components/ProductField";
 import ProductDescription from "../components/ProductDescription";
-import Modal from "../components/Modal";
+import ModalComponent from "../components/Modal";
 import axios from "axios";
 
 export default function Product() {
@@ -86,7 +86,7 @@ export default function Product() {
                 Delete
               </button>
             </div>
-            <Modal product={product} />
+            <ModalComponent product={product} id={id} />
           </div>
 
           {/* Vendor Inquiry */}

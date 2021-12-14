@@ -12,7 +12,7 @@ class ProductImages(models.Model):
         return f"photo-{pk}"
 
 class Product(models.Model):
-    vendor = models.ForeignKey(Vendor, on_delete = models.CASCADE)
+    vendor = models.ForeignKey(Vendor, on_delete = models.DO_NOTHING)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
