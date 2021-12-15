@@ -8,7 +8,7 @@ export default function ImageLightbox() {
   useEffect(() => {
     fetch(`/generic-products/${id}`)
       .then((res) => res.json())
-      .then((data) => setPhoto(data.photo));
+      .then((data) => setPhoto(data.photo_detail));
   }, []);
 
   let firstPhoto;

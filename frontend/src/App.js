@@ -10,6 +10,8 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
 import UploadProduct from "./pages/UploadProduct";
+import VendorRegister from "./pages/VendorRegister";
+import ImageUpload from "./pages/ImageUpload";
 
 function App() {
   return (
@@ -22,9 +24,11 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/UploadProduct" element={<UploadProduct />} />
+            <Route path="/uploadproduct" element={<UploadProduct />} />
+            <Route path="/imageupload" element={<ImageUpload />} />
+            <Route path="/vendorregister" element={<VendorRegister />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/SearchedProducts" element={<SearchedProduct />} />
+            <Route path="/searchedproducts" element={<SearchedProduct />} />
             <Route path="/product/:id" element={<Product />} />
           </Routes>
         </Layout>

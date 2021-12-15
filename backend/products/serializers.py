@@ -13,7 +13,7 @@ class ProductImagesSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         pid = validated_data.pop('pid')
         instance = self.Meta.model.objects.create(
-            **validated_date
+            **validated_data
         )
          
         product = Product.objects.get(id=pid)
@@ -27,7 +27,10 @@ class ProductSerializer(serializers.ModelSerializer):
     photo_detail = ProductImagesSerializer(source='photo', read_only = True, many=True)
     class Meta:
         model = Product
-        fields = ('id', 'vendor', 'vendor_detail','title','address', 'city','description','price','bedrooms', 'bathrooms', 'sqft', 'list_date', 'photo', 'photo_detail')
+        read_only_fields = ('vendor_detail', 'photo_detail',)
+        fields = '__all__'
+        
+        # fields = ('id', 'vendor', 'vendor_detail','title','address', 'city','description','price','bedrooms', 'bathrooms', 'sqft', 'list_date', 'photo', 'photo_detail')
 
     
     # def create(self,validated_date):

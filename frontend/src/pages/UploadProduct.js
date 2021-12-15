@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const instance = axios.create({
@@ -48,13 +48,13 @@ export default function UploadProduct() {
       })
       .catch(function (error) {
         setLoading(false);
-        setError("Failed to create an account!");
+        setError("Failed to create an product!");
         console.log(error);
       });
   }
 
   return (
-    <section id="register" className="bg-light py-5">
+    <section className="bg-light py-5">
       <div className="container">
         <div className="row">
           <div className="col-md-6 mx-auto">
@@ -192,6 +192,13 @@ export default function UploadProduct() {
                       Upload
                     </button>
                   </div>
+                  <Link
+                    class="btn btn-dark d-grid mt-3 "
+                    to={"/products/"}
+                    role="button"
+                  >
+                    Back to Feature Products{" "}
+                  </Link>
                 </form>
               </div>
             </div>

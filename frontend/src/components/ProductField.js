@@ -34,7 +34,7 @@ export default function ProductField(props) {
           </li>
           <li className="list-group-item text-success my-1">
             <i className="fas fa-bed"></i> Realtor:
-            <span className="float-end">{product.vendor?.name}</span>
+            <span className="float-end">{product.vendor_detail?.name}</span>
           </li>
         </ul>
       </div>

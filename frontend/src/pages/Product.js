@@ -69,7 +69,6 @@ export default function Product() {
 
             {/* Update & Delete Button */}
             <div className="d-flex">
-              {/* Button trigger modal */}
               <button
                 type="button"
                 className="btn btn-success col-6 me-3"
