@@ -23,11 +23,11 @@ class ProductImagesSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    vendor = VendorSerializer()
-    photo = ProductImagesSerializer(many=True)
+    vendor_detail = VendorSerializer(source='vendor', read_only = True)
+    photo_detail = ProductImagesSerializer(source='photo', read_only = True, many=True)
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ('id', 'vendor', 'vendor_detail','title','address', 'city','description','price','bedrooms', 'bathrooms', 'sqft', 'list_date', 'photo', 'photo_detail')
 
     
     # def create(self,validated_date):

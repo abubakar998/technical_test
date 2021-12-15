@@ -9,7 +9,7 @@ export default function UploadProduct() {
   const [vendor, setVendor] = useState();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
-  const [photo, setPhoto] = useState([]);
+  // const [photo, setPhoto] = useState([]);
   const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState();
@@ -29,7 +29,7 @@ export default function UploadProduct() {
       vendor: vendor,
       title: title,
       address: address,
-      photo: photo,
+      // photo: photo,
       city: city,
       description: description,
       price: price,
@@ -112,7 +112,7 @@ export default function UploadProduct() {
                       onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label for="recipient-name" className="col-form-label">
                       Photo
                     </label>
@@ -124,7 +124,7 @@ export default function UploadProduct() {
                       value={photo}
                       onChange={(e) => setPhoto(e.target.value)}
                     />
-                  </div>
+                  </div> */}
                   <div className="form-group">
                     <label for="message-text" className="col-form-label">
                       Description
