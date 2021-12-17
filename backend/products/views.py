@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import ProductSerializer, ProductImagesSerializer
+from .serializers import ProductSerializer, ProductImagesSerializer, ImagesSerializer
 from rest_framework import generics
 from .models import Product, ProductImages
 
@@ -18,4 +18,9 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class ProductImageUploadAPIView(generics.CreateAPIView):
     serializer_class = ProductImagesSerializer
+    queryset = ProductImages.objects.all()
+
+
+class ImageUploadAPIView(generics.CreateAPIView):
+    serializer_class = ImagesSerializer
     queryset = ProductImages.objects.all()

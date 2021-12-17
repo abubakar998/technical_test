@@ -40,13 +40,12 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     'rest_framework', # new
     'rest_framework.authtoken', # new
-    'rest_auth', # new
     'django.contrib.sites', # new
     'allauth', # new
     'allauth.account', # new
-    'allauth.socialaccount', # new
-    'rest_auth.registration', # new
     'corsheaders', # new
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 
     #local
     'products',
@@ -65,6 +64,38 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ],
+}
+
+SITE_ID = 1
+
+REST_USE_JWT = True
+
+JWT_AUTH_COOKIE = 'my-app-auth'
+
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+LOGIN_URL = 'http://localhost:8000/users/login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'abubakarbulet@gmail.com'
+EMAIL_HOST_PASSWORD = '01611093941'
+EMAIL_PORT = 587
+
 
 TEMPLATES = [
     {
@@ -143,28 +174,6 @@ CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
 
-# Django All Auth config. Add all of this.
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-AUTHENTICATION_BACKENDS = (    "django.contrib.auth.backends.ModelBackend",    "allauth.account.auth_backends.AuthenticationBackend",
-)
-
-SITE_ID = 1 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_UNIQUE_EMAIL = True
-
-# Rest Framework config. Add all of this.
-REST_FRAMEWORK = {    
-'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",    'DEFAULT_AUTHENTICATION_CLASSES': [        'rest_framework.authentication.TokenAuthentication',    
-],
-}
-
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'demo.serializers.UserSerializer'
-}
 
 # Media folder Settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

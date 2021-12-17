@@ -6,58 +6,54 @@ const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/",
 });
 export default function UploadProduct() {
-  const [vendor, setVendor] = useState();
-  const [title, setTitle] = useState("");
-  const [address, setAddress] = useState("");
-  // const [photo, setPhoto] = useState([]);
-  const [city, setCity] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState();
-  const [bedrooms, setBedrooms] = useState();
-  const [bathrooms, setBathrooms] = useState();
-  const [sqft, setSqft] = useState();
+  const [images, setImages] = useState([]);
+  const [imagesId, setImagesId] = useState([]);
 
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState();
+  const [productData, setProductData] = useState({});
 
   const navigate = useNavigate();
 
   async function uploadProduct(e) {
     e.preventDefault();
 
-    const p = {
-      vendor: vendor,
-      title: title,
-      address: address,
-      // photo: photo,
-      city: city,
-      description: description,
-      price: price,
-      bedrooms: bedrooms,
-      bathrooms: bathrooms,
-      sqft: sqft,
-    };
-    console.log(p);
+    const product = { ...productData, photo: imagesId };
+
     instance
-      .post("/generic-products/", p)
+      .post("/generic-products/", product)
       .then(function (response) {
-        setError("");
-        setLoading(true);
         console.log(response);
         navigate("/products/");
       })
       .catch(function (error) {
-        setLoading(false);
-        setError("Failed to create an product!");
         console.log(error);
       });
   }
+
+  const onChangeImage = (e) => {
+    const data = new FormData();
+    data.append("image", e.target.files[0]);
+
+    instance
+      .post("/image-upload/", data)
+      .then(function (response) {
+        setImages([...images, response.data]);
+        setImagesId([...imagesId, response.data.id]);
+        console.log(images, "xxx");
+      })
+      .catch(function (error) {
+        //
+      });
+  };
+
+  const onChangeHandler = (e) => {
+    setProductData({ ...productData, [e.target.name]: e.target.value });
+  };
 
   return (
     <section className="bg-light py-5">
       <div className="container">
         <div className="row">
-          <div className="col-md-6 mx-auto">
+          <div className="col-md-8 mx-auto">
             <div className="card">
               <div className="card-header bg-dark text-white">
                 <h4>Upload Product</h4>
@@ -72,9 +68,8 @@ export default function UploadProduct() {
                       type="text"
                       className="form-control"
                       required
-                      name="title"
-                      value={vendor}
-                      onChange={(e) => setVendor(e.target.value)}
+                      name="vendor"
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -86,8 +81,7 @@ export default function UploadProduct() {
                       className="form-control"
                       required
                       name="title"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -97,8 +91,8 @@ export default function UploadProduct() {
                     <input
                       type="text"
                       className="form-control"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
+                      name="address"
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -108,32 +102,19 @@ export default function UploadProduct() {
                     <input
                       type="text"
                       className="form-control"
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
+                      name="city"
+                      onChange={onChangeHandler}
                     />
                   </div>
-                  {/* <div className="form-group">
-                    <label for="recipient-name" className="col-form-label">
-                      Photo
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      required
-                      name="title"
-                      value={photo}
-                      onChange={(e) => setPhoto(e.target.value)}
-                    />
-                  </div> */}
                   <div className="form-group">
                     <label for="message-text" className="col-form-label">
                       Description
                     </label>
                     <textarea
                       className="form-control"
-                      id="message-text"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                      name="description"
+                      // value={description}
+                      onChange={onChangeHandler}
                     ></textarea>
                   </div>
                   <div className="form-group">
@@ -143,8 +124,8 @@ export default function UploadProduct() {
                     <input
                       type="text"
                       className="form-control"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
+                      name="price"
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -154,9 +135,8 @@ export default function UploadProduct() {
                     <input
                       type="text"
                       className="form-control"
-                      id="recipient-name"
-                      value={bedrooms}
-                      onChange={(e) => setBedrooms(e.target.value)}
+                      name="bedrooms"
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -166,11 +146,27 @@ export default function UploadProduct() {
                     <input
                       type="text"
                       className="form-control"
-                      id="recipient-name"
-                      value={bathrooms}
-                      onChange={(e) => setBathrooms(e.target.value)}
+                      name="bathrooms"
+                      onChange={onChangeHandler}
                     />
                   </div>
+
+                  <div className="form-group">
+                    <label for="recipient-name" className="col-form-label">
+                      Upload Image
+                    </label>
+                    <input
+                      className="form-control"
+                      onChange={onChangeImage}
+                      type="file"
+                    />
+                    <div className="grid">
+                      {images.map((item, key) => (
+                        <img className="col-3" key={key} src={item.image}></img>
+                      ))}
+                    </div>
+                  </div>
+
                   <div className="form-group">
                     <label for="recipient-name" className="col-form-label">
                       Sqft
@@ -178,18 +174,14 @@ export default function UploadProduct() {
                     <input
                       type="text"
                       className="form-control"
-                      id="recipient-name"
-                      value={sqft}
-                      onChange={(e) => setSqft(e.target.value)}
+                      name="sqft"
+                      // value={sqft}
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="d-grid gap-2">
-                    <button
-                      className="btn btn-success mt-3"
-                      type="submit"
-                      disabled={loading}
-                    >
-                      Upload
+                    <button className="btn btn-success mt-3" type="submit">
+                      Save
                     </button>
                   </div>
                   <Link

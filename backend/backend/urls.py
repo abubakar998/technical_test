@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
+
+from dj_rest_auth.views import PasswordResetView, PasswordResetConfirmView
+
+
 from django.conf.urls.static import static
 from rest_framework import routers
 import products.views as pv
@@ -32,8 +36,14 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('generic-products/', pv.ProductListView.as_view() ),
     path('generic-products/<id>/', pv.ProductDetailView.as_view() ),
+
+    path(('users/'), include('users.urls')),
     path('generic-users/', uv.UserListView.as_view() ),
     path('generic-user-create/', uv.UserCreate.as_view() ),
     path('generic-users/<id>/', uv.UserDetailView.as_view() ),
     path('product-images/', pv.ProductImageUploadAPIView.as_view(), name="img"),
+    path('image-upload/', pv.ImageUploadAPIView.as_view(), name="img_upload"),
+    path('password-reset/', PasswordResetView.as_view()),
+    path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

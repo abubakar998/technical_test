@@ -11,8 +11,6 @@ import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
 import UploadProduct from "./pages/UploadProduct";
 import VendorRegister from "./pages/VendorRegister";
-import ImageUpload from "./pages/ImageUpload";
-
 function App() {
   return (
     <div className="App">
@@ -25,7 +23,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/uploadproduct" element={<UploadProduct />} />
-            <Route path="/imageupload" element={<ImageUpload />} />
             <Route path="/vendorregister" element={<VendorRegister />} />
             <Route path="/products" element={<Products />} />
             <Route path="/searchedproducts" element={<SearchedProduct />} />

@@ -22,6 +22,13 @@ class ProductImagesSerializer(serializers.ModelSerializer):
         return instance
 
 
+class ImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImages
+        fields = '__all__'
+
+
+
 class ProductSerializer(serializers.ModelSerializer):
     vendor_detail = VendorSerializer(source='vendor', read_only = True)
     photo_detail = ProductImagesSerializer(source='photo', read_only = True, many=True)

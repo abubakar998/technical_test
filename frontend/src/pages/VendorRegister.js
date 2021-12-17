@@ -7,23 +7,16 @@ const instance = axios.create({
 });
 
 export default function VendorRegister() {
-  const [name, setName] = useState("");
-  const [photo, setPhoto] = useState();
-  const [image, setImage] = useState();
-  const [description, setDescription] = useState("");
-  const [phone, setPhone] = useState();
-  const [email, setEmail] = useState();
-
-  const [error, setError] = useState();
+  // const [vendorData, setVendorData] = useState({});
+  // const [image, setImage] = useState({});
+  const vendorData = new FormData();
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    if ([e.target.name] == "photo") {
-      setPhoto(e.target.value);
-      setImage(e.target.files[0]);
-    }
-  };
+  // const onChangeImage = (e) => {
+  //   setImage(e.target.files[0]);
+  //   console.log(image);
+  // };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,36 +25,25 @@ export default function VendorRegister() {
     //   return setError("Passwords don't match!");
     // }
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("photo", image);
-    formData.append("description", description);
-    formData.append("phone", phone);
-    formData.append("email", email);
-
     instance
-      .post("/api/vendors/", formData)
+      .post("/api/vendors/", vendorData)
       .then(function (response) {
-        setError("");
         console.log(response);
         navigate("/vendorregister");
       })
       .catch(function (error) {
-        setError("Failed to create Vendor!");
         console.log(error);
       });
-
-    // try {
-    //   setError("");
-    //   setLoading(true);
-
-    //   navigate.to("/");
-    // } catch (err) {
-    //   console.log(err);
-    //   setLoading(false);
-    //   setError("Failed to create an account!");
-    // }
   }
+
+  const onChangeHandler = (e) => {
+    if (e.target.name == "photo") {
+      const i = e.target.files[0];
+      vendorData.append(e.target.name, i);
+    } else {
+      vendorData.append(e.target.name, e.target.value);
+    }
+  };
 
   return (
     <section id="register" className="bg-light py-5">
@@ -81,8 +63,7 @@ export default function VendorRegister() {
                       name="name"
                       className="form-control mb-3 mt-1"
                       required
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -92,8 +73,7 @@ export default function VendorRegister() {
                       name="photo"
                       className="form-control mb-3 mt-1"
                       required
-                      value={photo}
-                      onChange={handleChange}
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -103,8 +83,7 @@ export default function VendorRegister() {
                       name="description"
                       className="form-control mb-3 mt-1"
                       required
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -114,8 +93,7 @@ export default function VendorRegister() {
                       name="phone"
                       className="form-control mb-3 mt-1"
                       required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={onChangeHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -125,8 +103,7 @@ export default function VendorRegister() {
                       name="email"
                       className="form-control mb-3 mt-1"
                       required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={onChangeHandler}
                     />
                   </div>
 
