@@ -12,63 +12,58 @@ export default function ProductSummery() {
       {productList.length > 0 && (
         //<InfiniteScroll dataLength={productList.length} loader="Loading...">
         <div className="row">
-          {productList.map(
-            (product) => (
-              console.log(product.photo_detail),
-              (
-                <div className="col-md-6 col-lg-4 mb-4">
-                  <div className="card">
-                    {
-                      <img
-                        className="card-img-top"
-                        src={product.photo_detail[0]?.image}
-                        alt=""
-                      />
-                    }
-                    <div className="card-img-overlay ">
-                      <h2>
-                        <span className="badge bg-success text-white">
-                          {product.price}
-                        </span>
-                      </h2>
+          {productList.map((product) => (
+            <div className="col-md-6 col-lg-4 mb-4">
+              <div className="card">
+                {
+                  <img
+                    className="card-img-top"
+                    src={product.photo_detail[0]?.image}
+                    alt=""
+                  />
+                }
+                <div className="card-img-overlay ">
+                  <h2>
+                    <span className="badge bg-success text-white">
+                      {product.price}
+                    </span>
+                  </h2>
+                </div>
+                <div className="card">
+                  <div className="card-body">
+                    <div className="text-center">
+                      <h4 className="text-body">{product.title}</h4>
+                      <p>
+                        <i className="fas fa-map-marker text-success"></i>
+                        <span className="ps-1">{product.address}</span>
+                      </p>
                     </div>
-                    <div className="card">
-                      <div className="card-body">
-                        <div className="text-center">
-                          <h4 className="text-body">{product.title}</h4>
-                          <p>
-                            <i className="fas fa-map-marker text-success"></i>
-                            <span className="ps-1">{product.address}</span>
-                          </p>
-                        </div>
-                        <hr />
-                        <div className="row">
-                          <div className="col-6 text-success">
-                            <i className="fas fa-user"></i>
-                            <span className="ps-1">
-                              {product.vendor_detail.name}
-                            </span>
-                          </div>
-                          <div className="col-6 text-success">
-                            <i className="fas fa-clock"></i>
-                            <span className="ps-1">{product.list_date}</span>
-                          </div>
-                        </div>
-                        <hr />
-                        <Link
-                          class="btn btn-success d-grid"
-                          to={`/product/${product.id}`}
-                          role="button"
-                        >
-                          More Info
-                        </Link>
+                    <hr />
+                    <div className="row">
+                      <div className="col-6 text-success">
+                        <i className="fas fa-user"></i>
+                        <span className="ps-1">
+                          {product.vendor_detail.name}
+                        </span>
+                      </div>
+                      <div className="col-6 text-success">
+                        <i className="fas fa-clock"></i>
+                        <span className="ps-1">{product.list_date}</span>
                       </div>
                     </div>
+                    <hr />
+                    <Link
+                      class="btn btn-success d-grid"
+                      to={`/product/${product.id}`}
+                      role="button"
+                    >
+                      More Info
+                    </Link>
                   </div>
                 </div>
-              )
-            )
-          )}
+              </div>
+            </div>
+          ))}
         </div>
         //</InfiniteScroll>
       )}

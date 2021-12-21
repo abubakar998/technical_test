@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -37,7 +37,7 @@ export default function VendorRegister() {
   }
 
   const onChangeHandler = (e) => {
-    if (e.target.name == "photo") {
+    if (e.target.name === "photo") {
       const i = e.target.files[0];
       vendorData.append(e.target.name, i);
     } else {

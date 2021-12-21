@@ -17,7 +17,7 @@ export default function Product() {
     fetch(`/generic-products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
-  }, []);
+  }, [id]);
 
   // async function updateProduct(e) {
   //   e.preventDefault();

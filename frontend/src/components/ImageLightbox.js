@@ -9,7 +9,7 @@ export default function ImageLightbox() {
     fetch(`/generic-products/${id}`)
       .then((res) => res.json())
       .then((data) => setPhoto(data.photo_detail));
-  }, []);
+  }, [id]);
 
   let firstPhoto;
   let photoList = [];

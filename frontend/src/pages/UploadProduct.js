@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/",
@@ -18,8 +19,14 @@ export default function UploadProduct() {
 
     const product = { ...productData, photo: imagesId };
 
+    const token = Cookies.get("token");
+
     instance
-      .post("/generic-products/", product)
+      .post("/generic-products/", product, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(function (response) {
         console.log(response);
         navigate("/products/");
@@ -162,7 +169,12 @@ export default function UploadProduct() {
                     />
                     <div className="grid">
                       {images.map((item, key) => (
-                        <img className="col-3" key={key} src={item.image}></img>
+                        <img
+                          className="col-3"
+                          key={key}
+                          src={item.image}
+                          alt="Light Box"
+                        ></img>
                       ))}
                     </div>
                   </div>

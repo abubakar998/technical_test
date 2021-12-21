@@ -41,17 +41,6 @@ export default function Register() {
         setError("Failed to create an account!");
         console.log(error);
       });
-
-    // try {
-    //   setError("");
-    //   setLoading(true);
-
-    //   navigate.to("/");
-    // } catch (err) {
-    //   console.log(err);
-    //   setLoading(false);
-    //   setError("Failed to create an account!");
-    // }
   }
 
   return (

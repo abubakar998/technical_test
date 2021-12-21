@@ -1,28 +1,51 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import AuthContext from "../contexts/AuthContext";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 export default function Login() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState();
+  // const { authToken, setAuthToken } = useContext(AuthContext);
 
-  const navigate = useNavigate();
+  // const [error, setError] = useState();
+  // const [loading, setLoading] = useState();
 
-  async function handleSubmit(e) {
+  // const navigate = useNavigate();
+
+  async function attemptLogin(e) {
     e.preventDefault();
 
-    try {
-      setError("");
-      setLoading(true);
-      // await login();
-      navigate.to("/");
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-      setError("Failed to create an account!");
+    if (username && password) {
+      axios
+        .post("users/login/", {
+          username: username,
+          password: password,
+        })
+        .then((res) => {
+          const token = res.data.access_token;
+          // console.log(token);
+          Cookies.set("token", token);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
+
+    // if (authToken) return navigate("/");
+
+    // try {
+    //   setError("");
+    //   setLoading(true);
+    //   // await login();
+    //   navigate.to("/");
+    // } catch (err) {
+    //   console.log(err);
+    //   setLoading(false);
+    //   setError("Failed to Login");
+    // }
   }
 
   return (
@@ -37,7 +60,7 @@ export default function Login() {
                 </h4>
               </div>
               <div className="card-body">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={attemptLogin}>
                   <div className="form-group">
                     <label for="username">Username</label>
                     <input
@@ -57,6 +80,8 @@ export default function Login() {
                       name="password"
                       className="form-control mt-1 "
                       required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
 

@@ -11,27 +11,29 @@ import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
 import UploadProduct from "./pages/UploadProduct";
 import VendorRegister from "./pages/VendorRegister";
+import { AuthProvider } from "./contexts/AuthContext";
+
 function App() {
   return (
-    <div className="App">
-      <Router>
-        {/* <ProductProvider> */}
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/uploadproduct" element={<UploadProduct />} />
-            <Route path="/vendorregister" element={<VendorRegister />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/searchedproducts" element={<SearchedProduct />} />
-            <Route path="/product/:id" element={<Product />} />
-          </Routes>
-        </Layout>
-        {/* </ProductProvider> */}
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Router>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/uploadproduct" element={<UploadProduct />} />
+              <Route path="/vendorregister" element={<VendorRegister />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/searchedproducts" element={<SearchedProduct />} />
+              <Route path="/product/:id" element={<Product />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </div>
+    </AuthProvider>
   );
 }
 
