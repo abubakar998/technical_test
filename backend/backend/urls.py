@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 
+from rest_framework.permissions import AllowAny
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
 from dj_rest_auth.views import PasswordResetView, PasswordResetConfirmView
 
 
@@ -47,3 +51,21 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+API_INFO = openapi.Info(
+    title="jumpet API",
+    default_version="v1",
+    description="API documentation for jumpet App",
+)
+
+API_DOCS_SCHEMA_VIEWS = get_schema_view(
+    API_INFO,
+    public=True,
+    permission_classes=(AllowAny,),
+)
+
+# if settings.USE_API_DOCS:
+urlpatterns += [
+    path("api-docs/", API_DOCS_SCHEMA_VIEWS.with_ui("swagger", cache_timeout=0), name="api_playground")
+]
